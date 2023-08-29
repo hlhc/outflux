@@ -89,7 +89,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/go,linux,macos,windows
-.vscode
 Gopkg.lock
-.idea
 

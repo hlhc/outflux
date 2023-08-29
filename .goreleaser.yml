@@ -1,0 +1,43 @@
+
+env:
+  - GO111MODULE=on
+  
+before:
+  hooks:
+    - go mod download
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    main: ./cmd/outflux
+
+archives:
+  - format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  name_template: "{{.Version}}"
+  prerelease: auto
+  mode: append
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
