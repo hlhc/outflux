@@ -59,18 +59,20 @@ type schemaExplorer interface {
 	timescaleExistsChecker
 }
 
-type defaultTableFinder struct{}
-type defaultColumnFinder struct{}
-type defaultHyptertableChecker struct{}
-type defaultHypertableDimensionExplorer struct{}
-type defaultTimescaleExistsChecker struct{}
-type defaultSchemaExplorer struct {
-	tableFinder
-	columnFinder
-	hypertableChecker
-	hypertableDimensionExplorer
-	timescaleExistsChecker
-}
+type (
+	defaultTableFinder                 struct{}
+	defaultColumnFinder                struct{}
+	defaultHyptertableChecker          struct{}
+	defaultHypertableDimensionExplorer struct{}
+	defaultTimescaleExistsChecker      struct{}
+	defaultSchemaExplorer              struct {
+		tableFinder
+		columnFinder
+		hypertableChecker
+		hypertableDimensionExplorer
+		timescaleExistsChecker
+	}
+)
 
 func newSchemaExplorer() schemaExplorer {
 	return &defaultSchemaExplorer{
@@ -87,7 +89,8 @@ func newSchemaExplorerWith(
 	colFinder columnFinder,
 	hyperChecker hypertableChecker,
 	dimExplorer hypertableDimensionExplorer,
-	tsChecker timescaleExistsChecker) schemaExplorer {
+	tsChecker timescaleExistsChecker,
+) schemaExplorer {
 	return &defaultSchemaExplorer{
 		tblFinder,
 		colFinder,

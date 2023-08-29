@@ -16,7 +16,8 @@ func TestDataSetToSQLTableDef(t *testing.T) {
 	threeCols := []*idrf.Column{
 		{Name: "col1", DataType: idrf.IDRFTimestamptz},
 		{Name: "col2", DataType: idrf.IDRFString},
-		{Name: "col 3", DataType: idrf.IDRFInteger64}}
+		{Name: "col 3", DataType: idrf.IDRFInteger64},
+	}
 	ds1, _ := idrf.NewDataSet("ds1", singleCol, singleCol[0].Name)
 	ds2, _ := idrf.NewDataSet("ds2", twoCols, twoCols[0].Name)
 	ds3, _ := idrf.NewDataSet("ds 3", threeCols, threeCols[0].Name)
@@ -126,7 +127,7 @@ func TestUpdateMetadata(t *testing.T) {
 			expectErr:           true,
 			expectNumQueryCalls: 1,
 			expectedQueries:     []string{`SELECT EXISTS (SELECT 1 FROM "` + timescaleCatalogSchema + `"."` + metTabName + `" WHERE key = $1)`},
-			expectedQueryArgs:   [][]interface{}{[]interface{}{metadataKey}},
+			expectedQueryArgs:   [][]interface{}{{metadataKey}},
 		},
 	}
 	for _, tc := range testCases {
@@ -168,43 +169,51 @@ func TestCreateHypertable(t *testing.T) {
 			expectErr: true,
 			info: &idrf.DataSet{
 				TimeColumn:  "tajm col",
-				DataSetName: tabName},
+				DataSetName: tabName,
+			},
 			db: &connections.MockPgxW{
 				ExecRes:  []pgx.CommandTag{""},
-				ExecErrs: []error{genErr}},
+				ExecErrs: []error{genErr},
+			},
 			expectNumExecCalls: 1,
 			expectedExecs:      []string{`SELECT create_hypertable('"` + tabName + `"', 'tajm col');`},
 		}, {
 			desc: "all good, no schema no chunk interval",
 			info: &idrf.DataSet{
 				TimeColumn:  "tajm col",
-				DataSetName: tabName},
+				DataSetName: tabName,
+			},
 			db: &connections.MockPgxW{
 				ExecRes:  []pgx.CommandTag{""},
-				ExecErrs: []error{nil}},
+				ExecErrs: []error{nil},
+			},
 			expectNumExecCalls: 1,
 			expectedExecs:      []string{`SELECT create_hypertable('"` + tabName + `"', 'tajm col');`},
 		}, {
 			desc: "all good, has schema no chunk interval",
 			info: &idrf.DataSet{
 				TimeColumn:  "tajm col",
-				DataSetName: tabName},
+				DataSetName: tabName,
+			},
 			schema: "she ma",
 			db: &connections.MockPgxW{
 				ExecRes:  []pgx.CommandTag{""},
-				ExecErrs: []error{nil}},
+				ExecErrs: []error{nil},
+			},
 			expectNumExecCalls: 1,
 			expectedExecs:      []string{`SELECT create_hypertable('"she ma"."` + tabName + `"', 'tajm col');`},
 		}, {
 			desc: "all good, has schema and chunk interval",
 			info: &idrf.DataSet{
 				TimeColumn:  "tajm col",
-				DataSetName: tabName},
+				DataSetName: tabName,
+			},
 			schema:            "she ma",
 			chunkTimeInterval: "1m",
 			db: &connections.MockPgxW{
 				ExecRes:  []pgx.CommandTag{""},
-				ExecErrs: []error{nil}},
+				ExecErrs: []error{nil},
+			},
 			expectNumExecCalls: 1,
 			expectedExecs:      []string{`SELECT create_hypertable('"she ma"."` + tabName + `"', 'tajm col', chunk_time_interval => interval '1m');`},
 		},

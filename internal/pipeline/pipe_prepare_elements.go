@@ -12,7 +12,8 @@ import (
 func (p *defPipe) prepareElements(
 	extractor extraction.Extractor,
 	ingestor ingestion.Ingestor,
-	transformers []transformation.Transformer) error {
+	transformers []transformation.Transformer,
+) error {
 	bundle, err := extractor.Prepare()
 	if err != nil {
 		return fmt.Errorf("%s: could not prepare extractor\n%v", p.id, err)

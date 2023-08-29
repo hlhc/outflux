@@ -24,7 +24,8 @@ func NewSchemaManager(
 	onConflictConvertIntToFloat bool,
 	me discovery.MeasureExplorer,
 	tagExplorer discovery.TagExplorer,
-	fieldExplorer discovery.FieldExplorer) *SchemaManager {
+	fieldExplorer discovery.FieldExplorer,
+) *SchemaManager {
 	dsConstructor := newDataSetConstructor(db, rp, onConflictConvertIntToFloat, client, tagExplorer, fieldExplorer)
 	return &SchemaManager{
 		measureExplorer:             me,

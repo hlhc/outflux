@@ -21,6 +21,7 @@ type defaultTableDropper struct{}
 func newTableDropper() tableDropper {
 	return &defaultTableDropper{}
 }
+
 func (d *defaultTableDropper) Drop(db connections.PgxWrap, table string, cascade bool) error {
 	var query string
 	if cascade {

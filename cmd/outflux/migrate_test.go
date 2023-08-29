@@ -33,6 +33,7 @@ func TestPreparePipeErrors(t *testing.T) {
 		}
 	}
 }
+
 func TestMigrateErrorOnDiscoverMeasures(t *testing.T) {
 	app := &appContext{
 		pipeService: &mockService{},
@@ -78,6 +79,7 @@ func TestMigrateCreatePipeReturnsError(t *testing.T) {
 		t.Error("expected error, none received")
 	}
 }
+
 func TestMigratePipeReturnsError(t *testing.T) {
 	errorReturningPipe := &mockPipe{runErr: fmt.Errorf("error")}
 	app := &appContext{
@@ -161,8 +163,7 @@ func TestOpenConnections(t *testing.T) {
 	}
 }
 
-type multiConnMock struct {
-}
+type multiConnMock struct{}
 
 func (m *multiConnMock) NewConnection(p *connections.InfluxConnectionParams) (influx.Client, error) {
 	return &mockInfConn{}, nil

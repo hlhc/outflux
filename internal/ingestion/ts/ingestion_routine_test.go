@@ -20,7 +20,7 @@ func TestOpenTx(t *testing.T) {
 	assert.Nil(t, res)
 	res, err = openTx(&ingestDataArgs{
 		dbConn: &connections.MockPgxW{
-			BeginRes: []*pgx.Tx{&pgx.Tx{}},
+			BeginRes: []*pgx.Tx{{}},
 			BeginErr: []error{nil},
 		},
 	})
@@ -42,5 +42,5 @@ func TestCopyToDb(t *testing.T) {
 		colNames: []string{"a"},
 	}, &pgx.Identifier{"x"}, &pgx.Tx{}, [][]interface{}{})
 	assert.Equal(t, mock.ExpCopyFromTab[0], pgx.Identifier{"x"})
-	assert.Equal(t, mock.ExpCopyFromCol, [][]string{[]string{"a"}})
+	assert.Equal(t, mock.ExpCopyFromCol, [][]string{{"a"}})
 }

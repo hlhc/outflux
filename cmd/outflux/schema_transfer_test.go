@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"sync"
 	"testing"
@@ -101,6 +102,7 @@ func TestErrorOnPipeCreate(t *testing.T) {
 		t.Errorf("expected err, none got")
 	}
 }
+
 func TestTransferSchema(t *testing.T) {
 	pipe := &mockPipe{counter: &runCounter{lock: &sync.Mutex{}}}
 	mockAll := &mockService{
@@ -122,9 +124,13 @@ func TestTransferSchema(t *testing.T) {
 
 type tdmc struct{ closed bool }
 
-func (t *tdmc) Ping(timeout time.Duration) (time.Duration, string, error)    { return 0, "", nil }
-func (t *tdmc) Write(bp influx.BatchPoints) error                            { return nil }
-func (t *tdmc) Query(q influx.Query) (*influx.Response, error)               { return nil, nil }
+func (t *tdmc) Ping(timeout time.Duration) (time.Duration, string, error) { return 0, "", nil }
+func (t *tdmc) Write(bp influx.BatchPoints) error                         { return nil }
+func (t *tdmc) WriteCtx(ctx context.Context, bp influx.BatchPoints) error { return nil }
+func (t *tdmc) Query(q influx.Query) (*influx.Response, error)            { return nil, nil }
+func (t *tdmc) QueryCtx(ctx context.Context, q influx.Query) (*influx.Response, error) {
+	return nil, nil
+}
 func (t *tdmc) QueryAsChunk(q influx.Query) (*influx.ChunkedResponse, error) { return nil, nil }
 func (t *tdmc) Close() error                                                 { t.closed = true; return nil }
 

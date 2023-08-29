@@ -45,7 +45,6 @@ func (fe *defaultFieldExplorer) DiscoverMeasurementFields(influxClient influx.Cl
 func (fe *defaultFieldExplorer) fetchMeasurementFields(influxClient influx.Client, db, rp, measurement string) ([][2]string, error) {
 	showFieldsQuery := fmt.Sprintf(showFieldsQueryTemplate, rp, measurement)
 	result, err := fe.queryService.ExecuteShowQuery(influxClient, db, showFieldsQuery)
-
 	if err != nil {
 		return nil, fmt.Errorf("error executing query: %s\n%v", showFieldsQuery, err)
 	}
@@ -89,7 +88,6 @@ func convertFields(fieldsWithType [][2]string, convertInt64ToFloat64 bool) ([]*i
 	for i, columnName := range columnNames {
 		columnType := columnMap[columnName]
 		idrfColumn, err := idrf.NewColumn(columnName, columnType)
-
 		if err != nil {
 			return nil, fmt.Errorf("could not convert field to Intermediate Data Representation Format. \n%v", err.Error())
 		}

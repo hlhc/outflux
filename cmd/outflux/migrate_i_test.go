@@ -1,4 +1,4 @@
-// +build integration
+//go:build integration
 
 package main
 
@@ -91,7 +91,7 @@ func defaultConfig(db string, measure string) (*cli.ConnectionConfig, *cli.Migra
 }
 
 func TestMigrateTagsAsJson(t *testing.T) {
-	//prepare influx db
+	// prepare influx db
 	start := time.Now().UTC()
 	db := "test_tags_json"
 	measure := "test"
@@ -156,7 +156,7 @@ func TestMigrateTagsAsJson(t *testing.T) {
 }
 
 func TestMigrateFieldsAsJson(t *testing.T) {
-	//prepare influx db
+	// prepare influx db
 	start := time.Now().UTC()
 	db := "test_fields_json"
 	measure := "test"
@@ -215,7 +215,7 @@ func TestMigrateFieldsAsJson(t *testing.T) {
 }
 
 func TestMigrateRenameOutputSchema(t *testing.T) {
-	//prepare influx db
+	// prepare influx db
 	start := time.Now().UTC()
 	db := "test_rename_schema"
 	targetSchema := "some_schema"
@@ -284,7 +284,7 @@ func TestMigrateRenameOutputSchema(t *testing.T) {
 }
 
 func TestMigrateRetentionPolicy(t *testing.T) {
-	//prepare influx db
+	// prepare influx db
 	start := time.Now().UTC()
 	db := "test_rp"
 	targetSchema := "some_schema"

@@ -97,6 +97,7 @@ func (sm *TSSchemaManager) validateOnly(dataSet *idrf.DataSet, tableExists bool)
 
 	return sm.validatePartitioning(dataSet)
 }
+
 func (sm *TSSchemaManager) prepareWithDropStrategy(dataSet *idrf.DataSet, strategy schemaconfig.SchemaStrategy, tableExists bool) error {
 	if tableExists {
 		log.Printf("Table %s exists, dropping it", dataSet.DataSetName)
@@ -144,7 +145,6 @@ func (sm *TSSchemaManager) prepareWithCreateIfMissing(dataSet *idrf.DataSet, tab
 	}
 
 	return sm.validatePartitioning(dataSet)
-
 }
 
 func (sm *TSSchemaManager) validateColumns(dataSet *idrf.DataSet) error {

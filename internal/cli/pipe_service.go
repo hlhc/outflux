@@ -32,7 +32,8 @@ type pipeService struct {
 func NewPipeService(
 	ingestorService ingestion.IngestorService,
 	extractorService extraction.ExtractorService,
-	transformerService TransformerService) PipeService {
+	transformerService TransformerService,
+) PipeService {
 	return &pipeService{
 		ingestorService:       ingestorService,
 		extractorService:      extractorService,

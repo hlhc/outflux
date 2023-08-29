@@ -15,7 +15,8 @@ func (p *pipeService) createElements(
 	infConn influx.Client,
 	tsConn connections.PgxWrap,
 	extrConf *extrConfig.ExtractionConfig,
-	ingConf *ingConfig.IngestorConfig) (extraction.Extractor, ingestion.Ingestor, error) {
+	ingConf *ingConfig.IngestorConfig,
+) (extraction.Extractor, ingestion.Ingestor, error) {
 	extractor, err := p.extractorService.InfluxExtractor(infConn, extrConf)
 	if err != nil {
 		return nil, nil, fmt.Errorf("could not create extractor\n%v", err)

@@ -27,20 +27,24 @@ func TestExistingTableCompatible(t *testing.T) {
 		}, {
 			existingColumns: []*columnDesc{
 				{columnName: "a", dataType: "text"},
-				{columnName: "b", dataType: "text", isNullable: "NO"}},
+				{columnName: "b", dataType: "text", isNullable: "NO"},
+			},
 			reqColumns: []*idrf.Column{
 				{Name: "a", DataType: idrf.IDRFString},
-				{Name: "b", DataType: idrf.IDRFString}},
+				{Name: "b", DataType: idrf.IDRFString},
+			},
 			timeCol:       "a",
 			desc:          "only time column should be not-nullable",
 			errorExpected: true,
 		}, {
 			existingColumns: []*columnDesc{
 				{columnName: "a", dataType: "text"},
-				{columnName: "b", dataType: "text", isNullable: "YES"}},
+				{columnName: "b", dataType: "text", isNullable: "YES"},
+			},
 			reqColumns: []*idrf.Column{
 				{Name: "a", DataType: idrf.IDRFString},
-				{Name: "b", DataType: idrf.IDRFString}},
+				{Name: "b", DataType: idrf.IDRFString},
+			},
 			timeCol:       "a",
 			desc:          "all is good",
 			errorExpected: false,

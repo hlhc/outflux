@@ -14,7 +14,8 @@ import (
 func (p *defPipe) run(
 	extractor extraction.Extractor,
 	ingestor ingestion.Ingestor,
-	transformers []transformation.Transformer) error {
+	transformers []transformation.Transformer,
+) error {
 	errorBroadcaster := utils.NewErrorBroadcaster()
 	ingErrors, err := errorBroadcaster.Subscribe(ingestor.ID())
 	if err != nil {

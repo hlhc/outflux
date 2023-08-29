@@ -155,12 +155,14 @@ func TestPrepareOk(t *testing.T) {
 			explorer: properMock(existingColumns),
 			creator:  okOnTableCreate(),
 			desc:     "validate only, compatible",
-		}, {
+		},
+		{
 			args:     prepareArgs{DataSet: dataSet, Strategy: schemaconfig.CreateIfMissing},
 			explorer: properMock(existingColumns),
 			creator:  okOnTableCreate(),
 			desc:     "create if missing, table exists, compatible",
-		}, {
+		},
+		{
 			args:     prepareArgs{DataSet: dataSet, Strategy: schemaconfig.CreateIfMissing},
 			explorer: properMockForCreateIfMissing(existingColumns),
 			creator:  okOnTableCreate(),
@@ -229,6 +231,7 @@ func onTsNotExits(cols []*columnDesc) schemaExplorer {
 	mocker := &mocker{tableExistsR: true, fetcColR: cols, tsExt: false}
 	return newSchemaExplorerWith(mocker, mocker, mocker, nil, mocker)
 }
+
 func onIsHypertableError(cols []*columnDesc) schemaExplorer {
 	mocker := &mocker{tableExistsR: true, fetcColR: cols, tsExt: true, isHypertableErr: fmt.Errorf("error")}
 	return newSchemaExplorerWith(mocker, mocker, mocker, nil, mocker)

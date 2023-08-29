@@ -14,8 +14,7 @@ type ingestionConfCreator interface {
 	create(pipeID string, conf *MigrationConfig) *config.IngestorConfig
 }
 
-type defaultIngestionConfCreator struct {
-}
+type defaultIngestionConfCreator struct{}
 
 func (s *defaultIngestionConfCreator) create(pipeID string, conf *MigrationConfig) *config.IngestorConfig {
 	return &config.IngestorConfig{

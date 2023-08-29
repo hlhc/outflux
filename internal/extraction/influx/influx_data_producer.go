@@ -90,5 +90,4 @@ func (dp *defaultDataProducer) Fetch(args *producerArgs) error {
 			args.dataChannel <- convertedRow
 		}
 	}
-
 }

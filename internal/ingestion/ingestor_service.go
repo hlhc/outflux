@@ -17,8 +17,7 @@ func NewIngestorService() IngestorService {
 	return &ingestorService{}
 }
 
-type ingestorService struct {
-}
+type ingestorService struct{}
 
 // NewIngestor creates a new instance of an Ingestor with a specified config, for a specified
 // data set and data channel

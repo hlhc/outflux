@@ -18,7 +18,8 @@ func newDataSetConstructor(
 	db, rp string, onConflictConvertIntToFloat bool,
 	client influx.Client,
 	tagExplorer discovery.TagExplorer,
-	fieldExplorer discovery.FieldExplorer) dataSetConstructor {
+	fieldExplorer discovery.FieldExplorer,
+) dataSetConstructor {
 	return &defaultDSConstructor{
 		database:                    db,
 		rp:                          rp,

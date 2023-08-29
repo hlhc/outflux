@@ -9,7 +9,8 @@ import (
 )
 
 func TestCacheItems(t *testing.T) {
-	cols := []*idrf.Column{{Name: "col1", DataType: idrf.IDRFTimestamp},
+	cols := []*idrf.Column{
+		{Name: "col1", DataType: idrf.IDRFTimestamp},
 		{Name: "col2", DataType: idrf.IDRFBoolean},
 		{Name: "col3", DataType: idrf.IDRFBoolean},
 	}
@@ -36,6 +37,7 @@ func TestCacheItems(t *testing.T) {
 		t.Errorf("combined column indexes not properly cached")
 	}
 }
+
 func TestPrepare(t *testing.T) {
 	colsBefore := []*idrf.Column{
 		{Name: "col1", DataType: idrf.IDRFTimestamp},
@@ -182,7 +184,7 @@ func TestTransformerStart(t *testing.T) {
 		t.Errorf("no output should have been produced")
 	}
 
-	//input row should be transformed
+	// input row should be transformed
 	outData = make(chan idrf.Row, 1)
 	inData = make(chan idrf.Row, 1)
 	errChan = make(chan error)
@@ -219,8 +221,8 @@ func TestTransformerStart(t *testing.T) {
 	if numRows != 1 {
 		t.Error("expected exactly one row to be produced")
 	}
-
 }
+
 func TestRowTransform(t *testing.T) {
 	// error on crating json
 	creator := &mockCreator{err: fmt.Errorf("error")}

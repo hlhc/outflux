@@ -42,8 +42,7 @@ func TestExecuteQuery(t *testing.T) {
 	expectedDatabaseName := "database name"
 	queryExecutor := &defaultInfluxQueryService{}
 	for _, mockClient := range cases {
-		var client influx.Client
-		client = &mockClient
+		var client influx.Client = &mockClient
 		response, err := queryExecutor.ExecuteQuery(client, expectedDatabaseName, mockClient.expectedQuery)
 		if mockClient.expectedError != nil && err != mockClient.expectedError {
 			// An error was expected, not from the content of the Response
@@ -126,8 +125,7 @@ func TestExecuteShowQueryWithFailure(t *testing.T) {
 		}}
 
 	for _, badCase := range badCases {
-		var client influx.Client
-		client = &badCase
+		var client influx.Client = &badCase
 		_, err := queryExecutor.ExecuteShowQuery(client, database, badCase.expectedQuery)
 		if err == nil {
 			t.Error("error not returned when expecting ")
@@ -140,8 +138,7 @@ func TestExecuteShowQueryWithOkResults(t *testing.T) {
 	database := "database"
 	goodQuery := "SHOW something"
 	goodValue := "1"
-	var goodCaseWithResults influx.Client
-	goodCaseWithResults = &MockClient{
+	var goodCaseWithResults influx.Client = &MockClient{
 		t:             t,
 		expectedQuery: goodQuery,
 		expectedResponse: &influx.Response{
@@ -173,8 +170,7 @@ func TestExecuteShowQueryWithOkResults(t *testing.T) {
 		t.Errorf("Expected one row with one value and that value to be '%s', but got '%v'", goodValue, response)
 	}
 
-	var goodCaseNoResults influx.Client
-	goodCaseNoResults = &MockClient{
+	var goodCaseNoResults influx.Client = &MockClient{
 		t:             t,
 		expectedQuery: goodQuery,
 		expectedResponse: &influx.Response{

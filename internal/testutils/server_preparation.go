@@ -60,7 +60,6 @@ func DeleteInfluxDb(db string) error {
 	_, err = queryService.ExecuteQuery(client, db, "DROP DATABASE "+db)
 	client.Close()
 	return err
-
 }
 
 // CreateInfluxMeasure creates a measure with the specified name. For each point the tags and field values are given

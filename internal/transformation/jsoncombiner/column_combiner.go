@@ -18,7 +18,8 @@ type defColCombiner struct{}
 func (d *defColCombiner) combine(
 	originalColumns []*idrf.Column,
 	columnNamesToReplace map[string]bool,
-	resultColumnName string) []*idrf.Column {
+	resultColumnName string,
+) []*idrf.Column {
 	jsonColumnAdded := false
 	numNewColumns := len(originalColumns) - len(columnNamesToReplace) + 1
 	newColumns := make([]*idrf.Column, numNewColumns)

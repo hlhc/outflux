@@ -63,7 +63,7 @@ func TestConstruct(t *testing.T) {
 			t.Errorf("expected data set to be named: a, got: %s", res.DataSetName)
 		}
 
-		if len(res.Columns) != 1+len(tags)+len(fields) { //time, tags, fields
+		if len(res.Columns) != 1+len(tags)+len(fields) { // time, tags, fields
 			t.Errorf("exected %d columns, got %d", 1+len(tags)+len(fields), len(res.Columns))
 		}
 

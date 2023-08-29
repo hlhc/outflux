@@ -116,11 +116,11 @@ func pipeRoutine(
 	connArgs *cli.ConnectionConfig,
 	args *cli.MigrationConfig,
 	measure string,
-	pipeChannel chan error) {
+	pipeChannel chan error,
+) {
 	_ = semaphore.Acquire(ctx, 1)
 
 	infConn, pgConn, err := openConnections(app, connArgs)
-
 	if err != nil {
 		pipeChannel <- fmt.Errorf("could not open connections to input and output database\n%v", err)
 		return

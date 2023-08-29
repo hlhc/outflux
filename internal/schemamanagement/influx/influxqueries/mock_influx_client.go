@@ -1,6 +1,7 @@
 package influxqueries
 
 import (
+	"context"
 	"fmt"
 	"testing"
 	"time"
@@ -28,8 +29,24 @@ func (mc *MockClient) Write(bp influx.BatchPoints) error {
 	return nil
 }
 
+// Write mock
+func (mc *MockClient) WriteCtx(ctx context.Context, bp influx.BatchPoints) error {
+	return nil
+}
+
 // Query mock
 func (mc *MockClient) Query(q influx.Query) (*influx.Response, error) {
+	if q.Command != mc.expectedQuery {
+		errorString := fmt.Sprintf("Expected <%s> as a query command, got: <%s>", mc.expectedQuery, q.Command)
+		mc.t.Error(errorString)
+		return nil, fmt.Errorf(errorString)
+	}
+
+	return mc.expectedResponse, mc.expectedError
+}
+
+// Query mock with context
+func (mc *MockClient) QueryCtx(ctx context.Context, q influx.Query) (*influx.Response, error) {
 	if q.Command != mc.expectedQuery {
 		errorString := fmt.Sprintf("Expected <%s> as a query command, got: <%s>", mc.expectedQuery, q.Command)
 		mc.t.Error(errorString)

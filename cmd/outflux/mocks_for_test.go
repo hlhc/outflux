@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"sync"
 	"time"
 
@@ -74,9 +75,13 @@ type mockInfConn struct {
 	closeCalled bool
 }
 
-func (m *mockInfConn) Ping(timeout time.Duration) (time.Duration, string, error)    { return 0, "", nil }
-func (m *mockInfConn) Write(bp influx.BatchPoints) error                            { return nil }
-func (m *mockInfConn) Query(q influx.Query) (*influx.Response, error)               { return nil, nil }
+func (m *mockInfConn) Ping(timeout time.Duration) (time.Duration, string, error) { return 0, "", nil }
+func (m *mockInfConn) Write(bp influx.BatchPoints) error                         { return nil }
+func (m *mockInfConn) WriteCtx(ctx context.Context, bp influx.BatchPoints) error { return nil }
+func (m *mockInfConn) Query(q influx.Query) (*influx.Response, error)            { return nil, nil }
+func (m *mockInfConn) QueryCtx(ctx context.Context, q influx.Query) (*influx.Response, error) {
+	return nil, nil
+}
 func (m *mockInfConn) QueryAsChunk(q influx.Query) (*influx.ChunkedResponse, error) { return nil, nil }
 func (m *mockInfConn) Close() error {
 	m.closeCalled = true

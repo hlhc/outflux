@@ -103,8 +103,8 @@ func transfer(
 	args *cli.MigrationConfig,
 	infConn influx.Client,
 	pgConn connections.PgxWrap,
-	measure string) error {
-
+	measure string,
+) error {
 	pipe, err := app.pipeService.Create(infConn, pgConn, measure, inputDb, args)
 	if err != nil {
 		return fmt.Errorf("could not create execution pipeline for measure '%s'\n%v", measure, err)
